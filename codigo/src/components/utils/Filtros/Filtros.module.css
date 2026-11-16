@@ -1,0 +1,135 @@
+
+/* Container principal */
+.containerFiltros {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  margin: 10px 0 30px 0;
+}
+
+/* Busca */
+.campoBusca {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  border: 1px solid #e8dcd4;
+  border-radius: 10px;
+  background: white;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.campoBusca:focus {
+  border-color: #ff2b0a;
+}
+
+/* Filtros secundários */
+.filtrosSecundarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filtroSelect,
+.filtroPreco {
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #e8dcd4;
+  border-radius: 9px;
+  background: white;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  min-width: 170px;
+  color: #333;
+}
+
+.filtroSelect:focus,
+.filtroPreco:focus {
+  border-color: #ff2b0a;
+}
+
+.filtroPreco {
+  width: 180px;
+}
+
+/* Nota 4,8 */
+.filtro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 20px;
+  border: 1px solid #eadbd1;
+  border-radius: 30px;
+  background: white;
+  color: #555;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filtro:hover {
+  border-color: #ff2b0a;
+}
+
+.filtroAtivo {
+  background: #fff0eb;
+  border-color: #ff2b0a;
+  color: #ff2b0a;
+}
+
+/* Limpar filtros */
+.filtroLimpar {
+  width: 150px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 7px;
+  background: #ed2600;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filtroLimpar:hover {
+  background: #cf2100;
+}
+
+/* Ordenação */
+.ordenacao {
+  width: 226px;
+  padding: 13px 16px;
+  border: 1px solid #eadbd1;
+  border-radius: 10px;
+  background: white;
+  color: #333;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+
+  .filtrosSecundarios {
+    flex-direction: column;
+  }
+
+  .filtroSelect,
+  .filtroPreco {
+    width: 100%;
+  }
+
+  .acoesFiltros {
+    flex-wrap: wrap;
+  }
+
+  .ordenacao {
+    width: 100%;
+    margin-left: 0;
+  }
+}

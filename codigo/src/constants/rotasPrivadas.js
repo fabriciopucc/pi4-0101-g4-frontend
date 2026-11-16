@@ -1,5 +1,6 @@
 const rotasPrivadas = [
-  "/perfil"
+  "/perfil",
+  "/avaliar"
 ];
 
 export default rotasPrivadas;

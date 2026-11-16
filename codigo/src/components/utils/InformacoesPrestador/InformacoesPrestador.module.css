@@ -1,0 +1,271 @@
+.containerInformacoesPrestador{
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.333);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.informacoes {
+  background: white;
+  width: calc(100% - 32px);
+  max-width: 510px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 28px;
+  border: none;
+  border-radius: 20px;
+  color: var(--cor-texto);
+  box-shadow: 0 25px 90px #00000030;
+  z-index: 1;
+}
+
+.informacoes::backdrop {
+  background: #292321c2;
+}
+
+/* CABEÇALHO */
+
+.cabecalhoModal {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 24px;
+}
+
+.avatarModal {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: var(--cor-principal);
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.identificacaoModal {
+  min-width: 0;
+}
+
+.informacoes .sobretitulo {
+  display: block;
+  padding-top: 0;
+  color: var(--cor-principal);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.informacoes h2 {
+  margin: 5px 0 0 0;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  overflow-wrap: anywhere;
+}
+
+.tituloProfissional {
+  color: var(--cor-secundaria);
+  font-size: 12px;
+}
+
+/* AVALIAÇÃO */
+.avaliacaoModal {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 20px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.estrelasModal {
+  display: flex;
+  gap: 2px;
+  font-size: 21px;
+}
+
+.estrelaAtiva {
+  color: #f5b800;
+}
+
+.estrelaInativa {
+  color: #dedede;
+}
+
+.avaliacaoModal strong {
+  font-size: 14px;
+}
+
+.avaliacaoModal > span:last-child {
+  color: var(--cor-secundaria);
+  font-size: 12px;
+}
+
+/* SEÇÕES */
+.secaoModal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.secaoModal > strong {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.secaoModal p {
+  margin: 0;
+  color: var(--cor-secundaria);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* CATEGORIAS */
+
+.categoriasModal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categoriaModal {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: var(--cor-suave);
+  color: var(--cor-principal);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* LOCALIZAÇÃO E CONTATO */
+
+.detalhesModal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detalhesModal > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalhesModal > div > span {
+  color: var(--cor-principal);
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+}
+
+.detalhesModal p {
+  margin: 0;
+}
+
+/* PREÇO */
+
+.precoModal {
+  margin-top: 24px;
+  padding: 17px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.precoModal > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.precoModal span {
+  color: var(--cor-secundaria);
+  font-size: 12px;
+}
+
+.precoModal strong {
+  color: var(--cor-principal);
+  font-size: 25px;
+}
+
+.precoModal small {
+  color: var(--cor-secundaria);
+  font-size: 12px;
+}
+
+/* BOTÕES */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 22px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.botao:hover {
+  transform: translateY(-1px);
+}
+
+.botaoPrincipal {
+  background: var(--cor-principal);
+  color: white;
+}
+
+.botaoPrincipal:hover {
+  background: var(--cor-principal-escura);
+}
+
+.botaoCompleto {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.fechar{
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--cor-suave);
+  color: var(--cor-principal);
+  margin-bottom: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.fechar:hover{
+  filter: brightness(90%);
+}
+
+@media (max-width: 500px) {
+  .informacoes {
+    padding: 20px;
+    width: calc(100% - 24px);
+  }
+
+  .informacoes h2 {
+    font-size: 21px;
+  }
+
+  .avatarModal {
+    width: 55px;
+    height: 55px;
+    font-size: 18px;
+  }
+}

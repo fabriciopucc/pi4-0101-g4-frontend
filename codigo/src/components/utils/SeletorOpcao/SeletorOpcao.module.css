@@ -1,0 +1,28 @@
+.cabecalho{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.opcao{
+  display: flex;
+  align-items: center;
+  padding:5px 10px;
+  margin: 0 10px;
+  background-color: rgb(234, 234, 234);
+  border-radius: 7.5px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.opcao:hover{
+  filter: brightness(90%);
+}
+
+.opcaoSelecionada{
+  background-color: var(--cor-principal);
+  color: #fff;
+}

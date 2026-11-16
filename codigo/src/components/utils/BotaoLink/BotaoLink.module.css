@@ -16,6 +16,10 @@
   filter: brightness(90%);
 }
 
+.margemSuperior{
+  margin-top: 20px;
+}
+
 .margemADireita{
   margin-right: 20px;
 }

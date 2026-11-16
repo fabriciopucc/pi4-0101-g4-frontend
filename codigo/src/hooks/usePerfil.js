@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import useMessageBox from "./useMessageBox";
 import api from "@/service/api";
+import useLoader from "./useLoader";
 
 export default function usePerfil(usuarioId) {
 
@@ -66,7 +67,8 @@ export default function usePerfil(usuarioId) {
     }));
   }
 
-  const {exibirMessageBox} = useMessageBox();
+  const {exibirMessageBox, tratarErro} = useMessageBox();
+  const {exibirCardLoader, esconderCardLoader} = useLoader();
 
   async function salvarPerfil(id) {
     const dados = {
@@ -81,12 +83,16 @@ export default function usePerfil(usuarioId) {
       longitude: perfil.longitude === "" ? null : Number(perfil.longitude)
     };
 
+    exibirCardLoader();
     await api.post("/perfil", dados)
     .then(() => {
       exibirMessageBox("/", true, "Perfil salvo sucesso!", "Prosseguir");
     })
     .catch((error) => {
-      console.log(error);
+      tratarErro(error);
+    })
+    .finally(() => {
+      esconderCardLoader();
     });
   }
 
@@ -107,7 +113,7 @@ export default function usePerfil(usuarioId) {
         });
       })
       .catch((error) => {
-        console.log(error);
+        tratarErro(error);
       });
   };
 

@@ -1,0 +1,237 @@
+
+.cardProfissional {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+  background: white;
+  gap: 17px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cardProfissional:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px #2227250b;
+}
+
+/* CABEÇALHO */
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.identificacao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.informacoesNome {
+  min-width: 0;
+}
+
+.informacoesNome h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+/* AVALIAÇÃO */
+.avaliacao {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--cor-borda);
+  font-size: 12px;
+}
+
+.estrelas {
+  display: flex;
+  gap: 2px;
+  font-size: 19px;
+}
+
+.estrelaAtiva {
+  color: #f5b800;
+}
+
+.estrelaInativa {
+  color: #dedede;
+}
+
+.avaliacao strong {
+  font-size: 14px;
+}
+
+.avaliacao > span {
+  color: var(--cor-secundaria);
+}
+
+/* SEÇÕES */
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.tituloSecao {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cor-secundaria);
+}
+
+.biografia {
+  margin: 0;
+  color: #454545;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* CATEGORIAS */
+
+.categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.categoria {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: var(--cor-suave);
+  color: var(--cor-principal);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* LOCALIZAÇÃO */
+
+.localizacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 15px;
+}
+
+.localizacao > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #454545;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.icone {
+  color: var(--cor-principal);
+  font-size: 16px;
+}
+
+/* CONTATO */
+
+.contato {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #454545;
+  font-size: 13px;
+}
+
+.contato > span:first-child {
+  color: var(--cor-principal);
+  font-size: 17px;
+}
+
+/* RODAPÉ */
+
+.rodape {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.preco {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.preco > span {
+  color: var(--cor-secundaria);
+  font-size: 11px;
+}
+
+.preco strong {
+  font-size: 21px;
+  color: var(--cor-principal);
+}
+
+.preco small {
+  color: var(--cor-secundaria);
+  font-size: 11px;
+}
+
+.botaoPerfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 15px;
+  border: none;
+  border-radius: 8px;
+  background: var(--cor-principal);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoPerfil:hover {
+  filter: brightness(0.9);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 650px) {
+  .cardProfissional {
+    padding: 16px;
+    gap: 15px;
+  }
+
+  .rodape {
+    align-items: stretch;
+  }
+
+  .botaoPerfil {
+    flex: 1;
+  }
+
+  .localizacao {
+    flex-direction: column;
+  }
+}

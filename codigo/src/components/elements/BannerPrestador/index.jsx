@@ -1,4 +1,4 @@
-import BotaoLink from '../BotaoLink';
+import BotaoLink from '@/components/utils/BotaoLink';
 import styles from './BannerPrestador.module.css';
 
 export default function BannerPrestador(){

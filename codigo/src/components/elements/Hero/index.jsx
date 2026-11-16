@@ -1,6 +1,6 @@
 import styles from './Hero.module.css';
 
-export default function Hero({irParaProfissionais}){
+export default function Hero(){
 
   return(
     <section className={styles.hero}>
@@ -22,7 +22,11 @@ export default function Hero({irParaProfissionais}){
         
         <button
           className={styles.botao+" "+styles["botaoPrincipal"]}
-          onClick={irParaProfissionais}
+          onClick={() => {
+            document.getElementById("profissionais")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
         >
           Encontrar um profissional →
         </button>

@@ -4,6 +4,7 @@ import api from "@/service/api";
 import { useLocation } from "react-router-dom";
 import useMessageBox from '../hooks/useMessageBox';
 import { useSessao } from "@/contexts/SessaoContext";
+import useLoader from "./useLoader";
 
 export default function useUsuario() {
   const [usuario, setUsuario] = useState({
@@ -14,6 +15,7 @@ export default function useUsuario() {
   });
   const {exibirMessageBox, tratarErro} = useMessageBox();
   const {encerrarSessao, atualizarSessao} = useSessao();
+  const {exibirCardLoader, esconderCardLoader} = useLoader();
 
   function preencherUsuario(event) {
     const { name, value } = event.target;
@@ -25,6 +27,7 @@ export default function useUsuario() {
   }
 
   const fazerCadastro = () => {
+    exibirCardLoader();
     api.post("/cadastro", usuario)
     .then((resp) => {
       atualizarSessao(resp.data);
@@ -32,10 +35,14 @@ export default function useUsuario() {
     })
     .catch((error) => {
       tratarErro(error);
+    })
+    .finally(() => {
+      esconderCardLoader();
     });
   }
 
   const fazerLogin = () => {
+    exibirCardLoader();
     api.post("/entrar", {
       "email": usuario.email.trim(),
       "senha": usuario.senha.trim()
@@ -46,10 +53,14 @@ export default function useUsuario() {
     })
     .catch((error) => {
       tratarErro(error);
+    })
+    .finally(() => {
+      esconderCardLoader();
     });
   }
 
   const sair = () => {
+    exibirCardLoader();
     api.post("/sair")
     .then(() => {
       encerrarSessao();
@@ -57,6 +68,9 @@ export default function useUsuario() {
     })
     .catch((error) => {
       tratarErro(error);
+    })
+    .finally(() => {
+      esconderCardLoader();
     });
   }
 
@@ -70,12 +84,16 @@ export default function useUsuario() {
   }, []);
 
   const buscarMeusDados = () => {
+    exibirCardLoader();
     api.get("/usuario-atual")
     .then((resp) => {
       setMeusDados(resp.data);
     })
     .catch((error) => {
       tratarErro(error);
+    })
+    .finally(() => {
+      esconderCardLoader();
     });
   }
 

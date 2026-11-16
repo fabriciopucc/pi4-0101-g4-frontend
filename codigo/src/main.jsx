@@ -8,6 +8,8 @@ import Login from "./pages/public/Login/index.jsx";
 import Perfil from "./pages/private/Perfil/index.jsx";
 import { MessageBoxProvider } from "./contexts/MesageBoxContext.jsx";
 import { SessaoProvider } from "./contexts/SessaoContext";
+import { LoaderProvider } from "./contexts/LoaderContext";
+import Avaliar from "./pages/private/Avaliar";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
         element: <Login/>
       },
       {
+        path: "/avaliar/:id_prestador",
+        element: <Avaliar/>
+      },
+      {
         path: "/perfil",
         element: <Perfil/>
       }
@@ -38,9 +44,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <SessaoProvider>
     <MessageBoxProvider>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <LoaderProvider>
+        <RouterProvider router={router}>
+          <App />
+        </RouterProvider>
+      </LoaderProvider>
     </MessageBoxProvider>
   </SessaoProvider>
 );

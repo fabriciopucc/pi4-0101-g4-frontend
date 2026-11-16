@@ -1,5 +1,5 @@
 import styles from './CabecalhoVoltar.module.css';
-import BotaoLink from '@/components/BotaoLink';
+import BotaoLink from '@/components/utils/BotaoLink';
 
 export default function CabecalhoVoltar({destino}){
 

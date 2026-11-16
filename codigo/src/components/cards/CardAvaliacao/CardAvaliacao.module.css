@@ -1,0 +1,87 @@
+
+.card {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cabecalho strong {
+  font-size: 15px;
+}
+
+.cabecalho span {
+  font-size: 12px;
+  color: gray;
+}
+
+.nota {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.estrelas {
+  display: flex;
+  gap: 3px;
+}
+
+.estrela {
+  display: flex;
+  width: 19px;
+  height: 19px;
+}
+
+.estrela svg {
+  width: 19px;
+  height: 19px;
+}
+
+.cheia {
+  fill: #ffc107;
+  color: #ffc107;
+}
+
+.vazia {
+  fill: transparent;
+  color: #ffc107;
+}
+
+.meiaEstrela {
+  position: relative;
+  display: inline-flex;
+}
+
+.meiaEstrela > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.meiaEstrela > span svg {
+  fill: #ffc107;
+  color: #ffc107;
+  max-width: none;
+}
+
+.nota > span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.comentario {
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}

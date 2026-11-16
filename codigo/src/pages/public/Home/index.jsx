@@ -1,157 +1,103 @@
-import { useEffect, useRef, useState } from "react";
+import styles from "./Home.module.css";
+
 import usePrestadores from "@/hooks/usePrestadores";
 import categorias from "@/constants/categorias";
 import Cabecalho from "@/components/layout/Cabecalho";
-import CardPrestador from "@/components/CardPrestador";
-import { normalizar } from "@/utils/normalizar";
+import CardPrestador from "@/components/cards/CardPrestador";
 import Rodape from "@/components/layout/Rodape";
-import Hero from "@/components/Hero";
-import BannerPrestador from "@/components/BannerPrestador";
-import JanelaFormulario from "@/components/InformacoesPrestador";
-
-import styles from "./Home.module.css";
-import InformacoesPrestador from "@/components/InformacoesPrestador";
+import Hero from "@/components/elements/Hero";
+import BannerPrestador from "@/components/elements/BannerPrestador";
+import InformacoesPrestador from "@/components/utils/InformacoesPrestador";
+import Categorias from "@/components/utils/Categorias";
+import Filtros from "@/components/utils/Filtros";
+import useFiltros from "@/hooks/useFiltros";
 
 function Home() {
-  const dialogRef = useRef(null);
-  const [busca, setBusca] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [categoria, setCategoria] = useState("Todos");
-  const [somenteMelhores, setSomenteMelhores] = useState(false);
-  const [somenteFavoritos, setSomenteFavoritos] = useState(false);
-  const [favoritos, setFavoritos] = useState([]);
-  const [ordenacao, setOrdenacao] = useState("avaliacao");
-  const [profissionalSelecionado, setProfissionalSelecionado] = useState(null);
-  const [tipoCadastro, setTipoCadastro] = useState("cliente");
-  const [cadastroDemonstrado, setCadastroDemonstrado] = useState(false);
-  const [mostrarContato, setMostrarContato] = useState(false);
-  const [exibirProfissional, setExibirProfissional] = useState(false);
 
   const {prestadores} = usePrestadores();
 
-  const listaFiltrada = prestadores
-    .filter((profissional) => {
-      const textoBusca = normalizar(
-        `${profissional.nome} ${profissional.categoria} ${profissional.descricao}`
-      );
-      const correspondeBusca = textoBusca.includes(normalizar(busca));
-      const correspondeCidade = normalizar(
-        profissional.regiao
-      ).includes(normalizar(cidade));
-      const correspondeCategoria =
-        categoria === "Todos" ||
-        profissional.categoria === categoria;
-      const correspondeNota =
-        !somenteMelhores || profissional.nota >= 4.8;
-      const correspondeFavorito =
-        !somenteFavoritos || favoritos.includes(profissional.id);
-      return (
-        correspondeBusca &&
-        correspondeCidade &&
-        correspondeCategoria &&
-        correspondeNota &&
-        correspondeFavorito
-      );
-    })
-    .sort((a, b) => {
-      if (ordenacao === "preco") {
-        return a.preco - b.preco;
-      }
-      if (ordenacao === "nome") {
-        return a.nome.localeCompare(b.nome, "pt-BR");
-      }
-      return b.nota - a.nota;
-    });
-  function alternarFavorito(id) {
-    setFavoritos((atuais) =>
-      atuais.includes(id)
-        ? atuais.filter((favoritoId) => favoritoId !== id)
-        : [...atuais, id]
+  const cidadesDisponiveis = [
+    ...new Set(
+      prestadores
+        .map((profissional) => profissional.cidade)
+        .filter(Boolean)
+    )
+  ].sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+  const{
+    categoria, setCategoria,
+    somenteMelhores, setSomenteMelhores,
+    ordenacao, setOrdenacao,
+    profissionalSelecionado, setProfissionalSelecionado,
+    exibirProfissional, setExibirProfissional,
+    busca, setBusca,
+    cidade, setCidade,
+    precoMaximo, setPrecoMaximo,
+    unidade, setUnidade,
+    limparFiltros
+  } = useFiltros(prestadores);
+
+  const listaFiltrada = prestadores.filter((profissional) => {
+    const textoBusca = busca.toLowerCase().trim();
+
+    // Busca por nome, titulo ou biografia
+    const correspondeBusca = !textoBusca ||
+      profissional.nome?.toLowerCase().includes(textoBusca) ||
+      profissional.titulo?.toLowerCase().includes(textoBusca) ||
+      profissional.biografia?.toLowerCase().includes(textoBusca);
+
+    // Categorias (aceita múltiplas categorias)
+    const categoriasProfissioanl = String(profissional.categoria || "").split(",").map((cat) => cat.trim());
+    const correspondeCategoria = categoria === "Todos" || categoriasProfissioanl.includes(categoria);
+
+    // Cidade
+    const correspondeCidade = cidade === "Todas" || profissional.cidade?.toLowerCase() === cidade.toLowerCase();
+
+    // Preço máximo
+    const correspondePreco = precoMaximo === "" || Number(profissional.preco) <= Number(precoMaximo);
+
+    // Unidade de cobrança
+    const correspondeUnidade = unidade === "Todas" ||  profissional.unidade?.toLowerCase() === unidade.toLowerCase();
+
+    // Nota mínima
+    const correspondeNota =  !somenteMelhores || profissional.nota >= 4.8;
+
+    return (
+      correspondeBusca &&
+      correspondeCategoria &&
+      correspondeCidade &&
+      correspondePreco &&
+      correspondeUnidade &&
+      correspondeNota
     );
-  }
-  function limparFiltros() {
-    setBusca("");
-    setCidade("");
-    setCategoria("Todos");
-    setSomenteMelhores(false);
-    setSomenteFavoritos(false);
-    setOrdenacao("avaliacao");
-  }
 
-  function abrirPerfil(profissional) {
-    setExibirProfissional(true);
-    setProfissionalSelecionado(profissional);
-  }
+    }).sort((a, b) => {
 
-  function irParaProfissionais() {
-    document.getElementById("profissionais")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }
-  function realizarBusca(evento) {
-    evento.preventDefault();
-    irParaProfissionais();
-  }
+    if (ordenacao === "preco") {
+      return a.preco - b.preco;
+    }
+    if (ordenacao === "nome") {
+      return a.nome.localeCompare(b.nome, "pt-BR");
+    }
+
+    return b.nota - a.nota;
+  });
+
 
   return (
     <>
-      <Cabecalho
-        cidade={cidade}
-      />
+      <Cabecalho/>
 
       <main className={styles.conteudoPrincipal}>
-        <Hero
-          irParaProfissionais={irParaProfissionais}
+        <Hero/>
+
+        <br />
+
+        <Categorias
+          categorias={categorias}
+          categoria={categoria}
+          setCategoria={setCategoria}
         />
-
-        <form className={styles.barraBusca} onSubmit={realizarBusca}>
-          <label className={styles.campoBusca}>
-            <span aria-hidden="true">⌕</span>
-            <input
-              type="search"
-              placeholder="Qual serviço você precisa?"
-              aria-label="Pesquisar serviço ou profissional"
-              value={busca}
-              onChange={(evento) => setBusca(evento.target.value)}
-            />
-          </label>
-
-          <label className={styles.campoBusca+" "+styles["campoCidade"]}>
-            <span aria-hidden="true">⌖</span>
-            <input
-              placeholder="Cidade ou região"
-              aria-label="Cidade ou região"
-              value={cidade}
-              onChange={(evento) => setCidade(evento.target.value)}
-            />
-          </label>
-          <button className={styles.botao+" "+styles["botaoPrincipal"]} type="submit">
-            Buscar →
-          </button>
-        </form>
-
-        <section className={styles.secaoCategorias}>
-          <div className={styles.tituloSecao}>
-            <h2>O que precisa resolver?</h2>
-            <p>Um profissional para cada necessidade.</p>
-          </div>
-
-          <div className={styles.listaCategorias}>
-            {categorias.map((item) => (
-              <button
-                key={item.nome}
-                className={styles.categoria+" "+styles[(categoria === item.nome) ? "categoria-ativa" : ""]}
-                onClick={() => setCategoria(item.nome)}
-                aria-pressed={categoria === item.nome}
-              >
-                <span className={styles.categoriaIcone} aria-hidden="true">
-                  {item.icone}
-                </span>
-                <span>{item.nome}</span>
-              </button>
-            ))}
-          </div>
-        </section>
 
         <section id="profissionais" className={styles.secaoProfissionais}>
           <div className={styles.tituloSecao}>
@@ -162,49 +108,40 @@ function Home() {
                 · dados demonstrativos
               </p>
             </div>
+
             <span className={styles.textoDestaque}>
               Conheça. Compare. Escolha.
             </span>
           </div>
           
-          <div className={styles.barraFiltros}>
-            <button
-              className={styles.filtro+" "+styles[(somenteFavoritos) ? "filtro-ativo" : ""]}
-              onClick={() => setSomenteMelhores(!somenteMelhores)}
-              aria-pressed={somenteMelhores}
-            >
-              ★ Nota 4,8 ou mais
-            </button>
-            <button
-              className={styles.filtro+" "+styles[(somenteFavoritos) ? "filtro-ativo" : ""]}
-              onClick={() => setSomenteFavoritos(!somenteFavoritos)}
-              aria-pressed={somenteFavoritos}
-            >
-              ♡ Meus favoritos
-            </button>
-            <button className={styles.filtro} onClick={limparFiltros}>
-              Limpar filtros
-            </button>
-            <select
-              className={styles.ordenacao}
-              aria-label="Ordenar profissionais"
-              value={ordenacao}
-              onChange={(evento) => setOrdenacao(evento.target.value)}
-            >
-              <option value="avaliacao">Melhor avaliação</option>
-              <option value="preco">Menor valor de referência</option>
-              <option value="nome">Nome: A–Z</option>
-            </select>
-          </div>
+          
+          <Filtros
+            somenteMelhores={somenteMelhores}
+            setSomenteMelhores={setSomenteMelhores}
+            limparFiltros={limparFiltros}
+            ordenacao={ordenacao}
+            setOrdenacao={setOrdenacao}
+            busca={busca}
+            setBusca={setBusca}
+            cidade={cidade}
+            setCidade={setCidade}
+            precoMaximo={precoMaximo}
+            setPrecoMaximo={setPrecoMaximo}
+            unidade={unidade}
+            setUnidade={setUnidade}
+            cidadesDisponiveis={cidadesDisponiveis}
+          />
+
 
           <div className={styles.gradeProfissionais}>
             {listaFiltrada.map((prestador) => (
               <CardPrestador
                 key={prestador.usuario_id}
                 prestador={prestador}
-                favorito={favoritos.includes(prestador.usuario_id)}
-                aoFavoritar={() => alternarFavorito(prestador.usuario_id)}
-                aoAbrir={() => abrirPerfil(prestador)}
+                aoAbrir={() => {
+                  setExibirProfissional(true);
+                  setProfissionalSelecionado(prestador);
+                }}
               />
             ))}
             

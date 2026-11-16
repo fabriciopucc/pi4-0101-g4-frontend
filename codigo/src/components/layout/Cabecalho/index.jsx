@@ -1,11 +1,11 @@
 import styles from './Cabecalho.module.css';
-import Logo from "@/components/Logo";
-import BotaoLink from '@/components/BotaoLink';
+import Logo from "@/components/utils/Logo";
+import BotaoLink from '@/components/utils/BotaoLink';
 import { Link } from 'react-router-dom';
 import { useSessao } from '@/contexts/SessaoContext';
 import useUsuario from '@/hooks/useUsuario';
 
-export default function Cabecalho({cidade}){
+export default function Cabecalho(){
 
   const {logado} = useSessao();
   const {sair} = useUsuario();
@@ -27,11 +27,6 @@ export default function Cabecalho({cidade}){
               </Link>
             )
           }
-        </div>
-
-        <div className={styles.regiaoCabecalho}>
-          <span>Buscar na região</span>
-          <strong>⌖ {cidade || "Paulínia e Campinas"}</strong>
         </div>
 
         <div className={styles.botoes}>
