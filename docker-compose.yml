@@ -1,0 +1,64 @@
+
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: quemresolve
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - dados_mysql:/var/lib/mysql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'MYSQL_PWD="$$MYSQL_PASSWORD" mysql --protocol=TCP -h 127.0.0.1 -u "$$MYSQL_USER" -D "$$MYSQL_DATABASE" -e "SELECT 1"'
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  backend-2:
+    build:
+      context: ../pi4-0101-g4-backend-2/codigo/backend-dados
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      DB_NAME: quemresolve
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_SERVER_HOST: "0.0.0.0"
+      DB_SERVER_PORT: "8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  backend-1:
+    build:
+      context: ../pi4-0101-g4-backend-1/codigo/backend-intermediario
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: backend-2
+      DB_SERVER_PORT: "8081"
+      HTTP_HOST: "0.0.0.0"
+      HTTP_PORT: "8080"
+      ALLOWED_ORIGINS: http://localhost:8082
+      SECURE_COOKIE: "false"
+    depends_on:
+      - backend-2
+
+  frontend:
+    build:
+      context: ./codigo
+      dockerfile: DockerFile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
+    depends_on:
+      - backend-1
+
+volumes:
+  dados_mysql:
