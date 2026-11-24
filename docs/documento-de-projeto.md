@@ -312,6 +312,7 @@ O QuemResolve tem quatro serviços em contêineres. O frontend (React, servido p
 O Backend 1 não acessa o banco: toda leitura e gravação passa pelo Backend 2 (`backend-dados`, Java 21), que escuta um socket TCP e é o único que usa JDBC contra o MySQL.
 
 O contato com o prestador sai do sistema: o navegador é levado a uma URL `wa.me`.
+![Imagem 1](img/Imagem1.png)
 
 ## 4.2 Implantação com Docker
 
@@ -395,6 +396,7 @@ As rotas abaixo são as do `RotasApi` (Backend 1). Várias diferem do que a Entr
 **Responsável:** Matheus Vinicius
 
 Diagrama do banco como criado por `InicializadorBanco` no Backend 2 (MySQL 8.4, banco `quemresolve`). Os identificadores de usuário são UUID em texto.
+![Imagem 1](img/Imagembd2.png)
 
 ## Tabelas
 
@@ -525,43 +527,44 @@ Esta seção descreve as telas principais do QuemResolve.
 
 Tela de entrada do sistema. Deve permitir criar conta com nome, e-mail, senha e tipo de usuário (cliente ou prestador), além de autenticar usuários existentes. O cadastro válido inicia uma sessão.
 
-![Figura 1 — Cadastro e login](imagens/figura-1-cadastro-login.png)
+![Figura 1](img/Imagem2.png)
+![Figura 2](img/Imagem3.png)
 
 ## Figura 2 — Pesquisa e listagem de prestadores
 
 Área do cliente para selecionar categoria e aplicar filtros por cidade, texto, valor máximo, unidade de cobrança e nota. Os cartões exibem nome, título, categoria, cidade/região, valor e nota média.
 
-![Figura 2 — Pesquisa e listagem de prestadores](imagens/figura-2-pesquisa-listagem.png)
+![Figura 1](img/Imagem4.png)
 
 ## Figura 3 — Perfil do prestador
 
 Janela ou área de detalhes aberta ao selecionar um cartão. Apresenta informações profissionais, serviços/categorias, região de atendimento, valor informado e avaliações recebidas.
 
-![Figura 3 — Perfil do prestador](imagens/figura-3-perfil-prestador.png)
+![Figura 3](img/Imagem5.png)
 
 ## Figura 4 — Contato com prestador
 
 Ação de contato disponível no perfil. Ao solicitar o contato, o sistema registra a ação e direciona o cliente para o WhatsApp do profissional por meio de link wa.me.
 
-![Figura 4 — Contato com prestador](imagens/figura-4-contato-prestador.png)
+![Figura 4](img/Imagem6.png)
 
 ## Figura 5 — Avaliação do prestador
 
 Formulário para cliente autenticado que já solicitou contato. Permite registrar nota de 1 a 5 e comentário de 10 a 1.000 caracteres; a avaliação atualiza a média exibida.
 
-![Figura 5 — Avaliação do prestador](imagens/figura-5-avaliacao-prestador.png)
+![Figura 5](img/Imagem7.png)
 
 ## Figura 6 — Avaliações do prestador
 
 Lista de avaliações que um prestador recebeu, pode ser vista por todos nos dados do prestador, ou pelo próprio prestador no seu perfil.
 
-![Figura 6 — Avaliações do prestador](imagens/figura-6-avaliacoes-prestador.png)
+![Figura 6](img/Imagem8.png)
 
 ## Figura 7 — Cadastro e edição do perfil profissional
 
 Área do prestador para informar ou atualizar título, biografia, categorias, cidade, região, valor, unidade de cobrança, raio de atendimento e celular.
 
-![Figura 7 — Cadastro e edição do perfil profissional](imagens/figura-7-cadastro-edicao-perfil.png)
+![Figura 7](img/Imagem9.png)
 
 ---
 
