@@ -525,44 +525,44 @@ Esta seção descreve as telas principais do QuemResolve.
 
 ## Figura 1 — Cadastro e login
 
-Tela de entrada do sistema. Deve permitir criar conta com nome, e-mail, senha e tipo de usuário (cliente ou prestador), além de autenticar usuários existentes. O cadastro válido inicia uma sessão.
+Tela de entrada do sistema. Deve permitir criar conta com nome, e-mail, senha e tipo de usuário (cliente ou prestador), além de autenticar usuários existentes. O cadastro válido inicia uma sessão. Corresponde à E1 e E2.
 
 ![Figura 1](img/Imagem2.png)
 ![Figura 2](img/Imagem3.png)
 
 ## Figura 2 — Pesquisa e listagem de prestadores
 
-Área do cliente para selecionar categoria e aplicar filtros por cidade, texto, valor máximo, unidade de cobrança e nota. Os cartões exibem nome, título, categoria, cidade/região, valor e nota média.
+Área do cliente para selecionar categoria e aplicar filtros por cidade, texto, valor máximo, unidade de cobrança e nota. Os cartões exibem nome, título, categoria, cidade/região, valor e nota média. Corresponde à E3 e E4.
 
 ![Figura 1](img/Imagem4.png)
 
 ## Figura 3 — Perfil do prestador
 
-Janela ou área de detalhes aberta ao selecionar um cartão. Apresenta informações profissionais, serviços/categorias, região de atendimento, valor informado e avaliações recebidas.
+Janela ou área de detalhes aberta ao selecionar um cartão. Apresenta informações profissionais, serviços/categorias, região de atendimento, valor informado e avaliações recebidas. Corresponde à E5.
 
 ![Figura 3](img/Imagem5.png)
 
 ## Figura 4 — Contato com prestador
 
-Ação de contato disponível no perfil. Ao solicitar o contato, o sistema registra a ação e direciona o cliente para o WhatsApp do profissional por meio de link wa.me.
+Ação de contato disponível no perfil. Ao solicitar o contato, o sistema registra a ação e direciona o cliente para o WhatsApp do profissional por meio de link wa.me. Corresponde à E7.
 
 ![Figura 4](img/Imagem6.png)
 
 ## Figura 5 — Avaliação do prestador
 
-Formulário para cliente autenticado que já solicitou contato. Permite registrar nota de 1 a 5 e comentário de 10 a 1.000 caracteres; a avaliação atualiza a média exibida.
+Formulário para cliente autenticado que já solicitou contato. Permite registrar nota de 1 a 5 e comentário de 10 a 1.000 caracteres; a avaliação atualiza a média exibida. Corresponde à E6.
 
 ![Figura 5](img/Imagem7.png)
 
 ## Figura 6 — Avaliações do prestador
 
-Lista de avaliações que um prestador recebeu, pode ser vista por todos nos dados do prestador, ou pelo próprio prestador no seu perfil.
+Lista de avaliações que um prestador recebeu, pode ser vista por todos nos dados do prestador, ou pelo próprio prestador no seu perfil. Corresponde à E6.
 
 ![Figura 6](img/Imagem8.png)
 
 ## Figura 7 — Cadastro e edição do perfil profissional
 
-Área do prestador para informar ou atualizar título, biografia, categorias, cidade, região, valor, unidade de cobrança, raio de atendimento e celular.
+Área do prestador para informar ou atualizar título, biografia, categorias, cidade, região, valor, unidade de cobrança, raio de atendimento e celular. Corresponde à E8.
 
 ![Figura 7](img/Imagem9.png)
 
